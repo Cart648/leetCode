@@ -11,18 +11,36 @@
  */
 
 // 双指针
-var twoSum = function(numbers, target) {
-    let min = 1,
-        max = numbers.length
+// var twoSum = function(numbers, target) {
+//     let min = 1,
+//         max = numbers.length
 
-    while (min <= max) {
-        const sub = numbers[min - 1] + numbers[max - 1]
+//     while (min <= max) {
+//         const sub = numbers[min - 1] + numbers[max - 1]
     
-        if (sub == target) {
-            return [min, max]
+//         if (sub == target) {
+//             return [min, max]
+//         }
+//         sub > target ? max-- : min++
+//     }
+// }
+
+
+// 二分查找法
+var twoSum = function(numbers, target) {
+    for (let i=0; i<numbers.length; i++) {
+        let min = i + 1,
+            max = numbers.length - 1
+
+        while (min <= max) {
+            const mid = parseInt( (max - min) / 2 + min )
+        
+            if (numbers[mid] == target - numbers[i]) {
+                return [i+1, mid+1]
+            }
+            numbers[mid] > target - numbers[i] ? max = mid - 1 : min = mid + 1
         }
-        sub > target ? max-- : min++
     }
 }
 
-console.log(twoSum([0,2,6,7,11], 9))
+console.log(twoSum([1,2,3,4,4,9,56,90], 8))
